@@ -21,13 +21,24 @@ CINDER_BRANCH={{ devstack_cinder_release }}
 HORIZON_BRANCH={{ devstack_horizon_release }}
 CEILOMETER_BRANCH={{ devstack_ceilometer_release }}
 HEAT_BRANCH={{ devstack_heat_release }}
-SWIFT_BRANCH={{ devstack_swift_release }}
 
-{% if devstack_heat_enabled %}
-ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
+SWIFT_BRANCH={{ devstack_swift_release }}
+SWIFT_HASH={{ devstack_swift_hash }}
+SWIFT_REPLICAS={{ devstack_swift_replicas }}
+
+{% if devstack_neutron_enabled %}
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron
 {% endif %}
 
 {% if devstack_ceilometer_enabled %}
 ENABLED_SERVICES+=,ceilometer-acompute,ceilometer-acentral,ceilometer-collector,ceilometer-api
 ENABLED_SERVICES+=,ceilometer-alarm-notifier,ceilometer-alarm-evaluator
+{% endif %}
+
+{% if devstack_heat_enabled %}
+ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
+{% endif %}
+
+{% if devstack_swift_enabled %}
+ENABLED_SERVICES+=,s-proxy,s-object,s-container,s-account
 {% endif %}
