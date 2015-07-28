@@ -1,0 +1,8 @@
+---
+
+- name: Provision a DevStack environment
+  hosts: all
+  gather_facts: yes
+  roles:
+    - common
+    - devstack

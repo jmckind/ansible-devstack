@@ -1,0 +1,32 @@
+---
+
+devstack_source_repo: "https://github.com/openstack-dev/devstack.git"
+devstack_source_dir: "{{ ansible_env.HOME }}/devstack"
+devstack_release: "master"
+
+devstack_git_base: "https://git.openstack.org"
+devstack_install_dir: "/opt/stack"
+devstack_log_file: "{{ install_dir }}/logs/stack.sh.log"
+
+devstack_admin_password: "password"
+devstack_database_password: "{{ devstack_admin_password }}"
+devstack_rabbit_password: "{{ devstack_admin_password }}"
+devstack_service_token: "{{ devstack_admin_password }}"
+devstack_service_password: "{{ devstack_admin_password }}"
+
+devstack_fixed_ip_range: "172.31.1.0/24"
+devstack_floating_ip_range: "192.168.10.0/25"
+devstack_host_ip: "127.0.0.1"
+
+devstack_openstack_milestone: "{{ devstack_release }}"
+devstack_keystone_release: "{{ devstack_openstack_milestone }}"
+devstack_glance_release: "{{ devstack_openstack_milestone }}"
+devstack_neutron_release: "{{ devstack_openstack_milestone }}"
+devstack_nova_release: "{{ devstack_openstack_milestone }}"
+devstack_cinder_release: "{{ devstack_openstack_milestone }}"
+devstack_horizon_release: "{{ devstack_openstack_milestone }}"
+devstack_ceilometer_enabled: yes
+devstack_ceilometer_release: "{{ devstack_openstack_milestone }}"
+devstack_heat_enabled: yes
+devstack_heat_release: "{{ devstack_openstack_milestone }}"
+devstack_swift_release: "{{ devstack_openstack_milestone }}"

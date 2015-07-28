@@ -1,0 +1,22 @@
+---
+
+- name: Dump all variables
+  connection: local
+  local_action: template src=environment.j2 dest={{ inventory_dir }}/environment.log
+
+- name: ensure the bashrc file is present
+  copy: src=bashrc dest={{ ansible_env.HOME }}/.bashrc mode=0700
+
+- name: ensure common packages are present
+  apt: name={{ item }} state=present update_cache=yes
+  sudo_user: root
+  with_items:
+    - curl
+    - iftop
+    - htop
+    - git
+    - manpages
+    - openssl
+    - python-pip
+    - vim
+    - wget

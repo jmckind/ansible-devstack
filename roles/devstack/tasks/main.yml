@@ -1,0 +1,10 @@
+---
+
+- name: ensure the devstack source is present
+  git: repo={{ devstack_source_repo }} dest={{ devstack_source_dir }} version={{ devstack_release }}
+
+- name: ensure the devstack configuration file is present
+  template: src=local.conf.j2 dest={{ devstack_source_dir }}/local.conf
+
+- name: ensure devstack is installed
+  shell: ./stack.sh chdir={{ devstack_source_dir }}
