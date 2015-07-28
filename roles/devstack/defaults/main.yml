@@ -6,7 +6,7 @@ devstack_release: "master"
 
 devstack_git_base: "https://git.openstack.org"
 devstack_install_dir: "/opt/stack"
-devstack_log_file: "{{ install_dir }}/logs/stack.sh.log"
+devstack_log_file: "{{ devstack_install_dir }}/logs/stack.sh.log"
 
 devstack_admin_password: "password"
 devstack_database_password: "{{ devstack_admin_password }}"
@@ -18,15 +18,31 @@ devstack_fixed_ip_range: "172.31.1.0/24"
 devstack_floating_ip_range: "192.168.10.0/25"
 devstack_host_ip: "127.0.0.1"
 
-devstack_openstack_milestone: "{{ devstack_release }}"
-devstack_keystone_release: "{{ devstack_openstack_milestone }}"
-devstack_glance_release: "{{ devstack_openstack_milestone }}"
-devstack_neutron_release: "{{ devstack_openstack_milestone }}"
-devstack_nova_release: "{{ devstack_openstack_milestone }}"
-devstack_cinder_release: "{{ devstack_openstack_milestone }}"
-devstack_horizon_release: "{{ devstack_openstack_milestone }}"
+devstack_keystone_enabled: yes
+devstack_keystone_release: "{{ devstack_release }}"
+
+devstack_glance_enabled: yes
+devstack_glance_release: "{{ devstack_release }}"
+
+devstack_neutron_enabled: yes
+devstack_neutron_release: "{{ devstack_release }}"
+
+devstack_nova_enabled: yes
+devstack_nova_release: "{{ devstack_release }}"
+
+devstack_cinder_enabled: yes
+devstack_cinder_release: "{{ devstack_release }}"
+
+devstack_horizon_enabled: yes
+devstack_horizon_release: "{{ devstack_release }}"
+
 devstack_ceilometer_enabled: yes
-devstack_ceilometer_release: "{{ devstack_openstack_milestone }}"
+devstack_ceilometer_release: "{{ devstack_release }}"
+
 devstack_heat_enabled: yes
-devstack_heat_release: "{{ devstack_openstack_milestone }}"
-devstack_swift_release: "{{ devstack_openstack_milestone }}"
+devstack_heat_release: "{{ devstack_release }}"
+
+devstack_swift_enabled: yes
+devstack_swift_release: "{{ devstack_release }}"
+devstack_swift_hash: "{{ 1000000 | random(1) | to_uuid | hash('md5') }}"
+devstack_swift_replicas: 1
