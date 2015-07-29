@@ -1,11 +1,2 @@
-# Ansible artifacts
 *.log
-
-# Vagrant artifacts
 .vagrant
-
-# DevStack artifacts
-stack/.wheelhouse
-stack/data
-stack/logs
-stack/status
