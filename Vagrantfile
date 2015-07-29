@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = "devstack"
 
-    config.vm.network "forwarded_port", guest: 80, host: 8808     # horizon
+    config.vm.network "forwarded_port", guest: 80, host: 8800     # horizon
     config.vm.network "forwarded_port", guest: 5000, host: 5000   # keystone public/internal
     config.vm.network "forwarded_port", guest: 35357, host: 35357 # keystone admin
     config.vm.network "forwarded_port", guest: 8773, host: 8773   # nova ec2
