@@ -33,13 +33,13 @@ devstack_horizon_release: "{{ devstack_release }}"
 devstack_neutron_enabled: no
 devstack_neutron_release: "{{ devstack_release }}"
 
-devstack_ceilometer_enabled: yes
+devstack_ceilometer_enabled: no
 devstack_ceilometer_release: "{{ devstack_release }}"
 
-devstack_heat_enabled: yes
+devstack_heat_enabled: no
 devstack_heat_release: "{{ devstack_release }}"
 
-devstack_swift_enabled: yes
+devstack_swift_enabled: no
 devstack_swift_release: "{{ devstack_release }}"
 devstack_swift_hash: "{{ 1000000 | random(1) | to_uuid | hash('md5') }}"
 devstack_swift_replicas: 1
