@@ -6,5 +6,8 @@
 - name: ensure the devstack configuration file is present
   template: src=local.conf.j2 dest={{ devstack_source_dir }}/local.conf
 
+- name: ensure the devstack state directory is present
+  file: path={{ devstack_state_dir }} state=directory owner={{ ansible_env.USER }} group={{ ansible_env.USER }}
+
 - name: ensure devstack is installed
   shell: ./stack.sh chdir={{ devstack_source_dir }}

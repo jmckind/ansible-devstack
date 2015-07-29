@@ -1,40 +1,36 @@
 ---
 
-devstack_source_repo: "https://github.com/openstack-dev/devstack.git"
+devstack_source_repo: https://github.com/openstack-dev/devstack.git
 devstack_source_dir: "{{ ansible_env.HOME }}/devstack"
-devstack_release: "master"
+devstack_release: master
 
-devstack_git_base: "https://git.openstack.org"
-devstack_install_dir: "/opt/stack"
+devstack_git_base: https://git.openstack.org
+devstack_reclone: yes
+devstack_install_dir: /opt/stack
+devstack_state_dir: "{{ ansible_env.HOME }}/stack"
+devstack_data_dir: "{{ devstack_state_dir }}/data"
+devstack_service_dir: "{{ devstack_state_dir }}/status"
+devstack_wheelhouse_dir: "{{ devstack_state_dir }}/.wheelhouse"
 devstack_log_file: "{{ devstack_install_dir }}/logs/stack.sh.log"
 
-devstack_admin_password: "password"
+devstack_admin_password: password
 devstack_database_password: "{{ devstack_admin_password }}"
 devstack_rabbit_password: "{{ devstack_admin_password }}"
 devstack_service_token: "{{ devstack_admin_password }}"
 devstack_service_password: "{{ devstack_admin_password }}"
 
-devstack_fixed_ip_range: "172.31.1.0/24"
-devstack_floating_ip_range: "192.168.10.0/25"
-devstack_host_ip: "127.0.0.1"
+devstack_fixed_ip_range: 172.31.1.0/24
+devstack_floating_ip_range: 192.168.10.0/25
+devstack_host_ip: 127.0.0.1
 
-devstack_keystone_enabled: yes
 devstack_keystone_release: "{{ devstack_release }}"
-
-devstack_glance_enabled: yes
+devstack_nova_release: "{{ devstack_release }}"
 devstack_glance_release: "{{ devstack_release }}"
+devstack_cinder_release: "{{ devstack_release }}"
+devstack_horizon_release: "{{ devstack_release }}"
 
 devstack_neutron_enabled: yes
 devstack_neutron_release: "{{ devstack_release }}"
-
-devstack_nova_enabled: yes
-devstack_nova_release: "{{ devstack_release }}"
-
-devstack_cinder_enabled: yes
-devstack_cinder_release: "{{ devstack_release }}"
-
-devstack_horizon_enabled: yes
-devstack_horizon_release: "{{ devstack_release }}"
 
 devstack_ceilometer_enabled: yes
 devstack_ceilometer_release: "{{ devstack_release }}"
