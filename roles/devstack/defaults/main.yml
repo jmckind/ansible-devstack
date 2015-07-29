@@ -30,7 +30,7 @@ devstack_glance_release: "{{ devstack_release }}"
 devstack_cinder_release: "{{ devstack_release }}"
 devstack_horizon_release: "{{ devstack_release }}"
 
-devstack_neutron_enabled: yes
+devstack_neutron_enabled: no
 devstack_neutron_release: "{{ devstack_release }}"
 
 devstack_ceilometer_enabled: yes
