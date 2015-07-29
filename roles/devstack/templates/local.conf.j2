@@ -3,9 +3,9 @@ GIT_BASE={{ devstack_git_base }}
 RECLONE={{ devstack_reclone }}
 DEST={{ devstack_install_dir }}
 DATA_DIR={{ devstack_data_dir }}
+LOGDIR={{ devstack_logs_dir }}
 SERVICE_DIR={{ devstack_service_dir }}
 WHEELHOUSE={{ devstack_wheelhouse_dir }}
-LOGFILE={{ devstack_log_file }}
 
 ADMIN_PASSWORD={{ devstack_admin_password }}
 DATABASE_PASSWORD={{ devstack_database_password }}
@@ -18,11 +18,11 @@ FLOATING_RANGE={{ devstack_floating_ip_range }}
 HOST_IP={{ devstack_host_ip }}
 
 KEYSTONE_BRANCH={{ devstack_keystone_release }}
-GLANCE_BRANCH={{ devstack_glance_release }}
-NEUTRON_BRANCH={{ devstack_neutron_release }}
 NOVA_BRANCH={{ devstack_nova_release }}
+GLANCE_BRANCH={{ devstack_glance_release }}
 CINDER_BRANCH={{ devstack_cinder_release }}
 HORIZON_BRANCH={{ devstack_horizon_release }}
+NEUTRON_BRANCH={{ devstack_neutron_release }}
 CEILOMETER_BRANCH={{ devstack_ceilometer_release }}
 HEAT_BRANCH={{ devstack_heat_release }}
 

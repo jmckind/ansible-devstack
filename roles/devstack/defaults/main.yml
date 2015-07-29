@@ -9,6 +9,7 @@ devstack_reclone: yes
 devstack_install_dir: /opt/stack
 devstack_state_dir: "{{ ansible_env.HOME }}/stack"
 devstack_data_dir: "{{ devstack_state_dir }}/data"
+devstack_logs_dir: "{{ devstack_state_dir }}/logs"
 devstack_service_dir: "{{ devstack_state_dir }}/status"
 devstack_wheelhouse_dir: "{{ devstack_state_dir }}/.wheelhouse"
 devstack_log_file: "{{ devstack_install_dir }}/logs/stack.sh.log"
