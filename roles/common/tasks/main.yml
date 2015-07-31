@@ -14,9 +14,7 @@
     - curl
     - iftop
     - htop
-    - git
     - manpages
     - openssl
-    - python-pip
     - vim
     - wget
