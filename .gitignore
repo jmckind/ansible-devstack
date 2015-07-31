@@ -1,2 +1,9 @@
-*.log
+# Vagrant artifacts
+
 .vagrant
+
+# Ansible artifacts
+
+*.log
+group_vars/all
+hosts-raxcloud
