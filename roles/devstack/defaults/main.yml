@@ -4,6 +4,7 @@ devstack_source_repo: https://github.com/openstack-dev/devstack.git
 devstack_source_dir: "{{ ansible_env.HOME }}/devstack"
 devstack_release: master
 
+devstack_run_offline: False
 devstack_git_base: https://git.openstack.org
 devstack_reclone: yes
 devstack_install_dir: /opt/stack
@@ -20,8 +21,8 @@ devstack_rabbit_password: "{{ devstack_admin_password }}"
 devstack_service_token: "{{ devstack_admin_password }}"
 devstack_service_password: "{{ devstack_admin_password }}"
 
-devstack_fixed_ip_range: 172.31.1.0/24
-devstack_floating_ip_range: 192.168.10.0/25
+devstack_fixed_ip_range: 10.0.0.0/24
+devstack_floating_ip_range: 172.24.4.0/24
 devstack_host_ip: 127.0.0.1
 
 devstack_keystone_release: "{{ devstack_release }}"
