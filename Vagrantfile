@@ -23,7 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "stack", "/opt/stack"
 
     config.vm.provider "virtualbox" do |vbx|
-        vbx.customize ["modifyvm", :id, "--memory", "4096"]
+        vbx.name = "devstack"
+        vbx.memory = 8192
+        vbx.cpus = 4
     end
 
     if Vagrant.has_plugin?("vagrant-vbguest")
