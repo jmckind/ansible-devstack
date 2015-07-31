@@ -1,5 +1,15 @@
 ---
 
+- name: ensure required packages are present
+  apt: name={{ item }} state=present
+  sudo_user: root
+  with_items:
+    - build-essential
+    - git
+    - python-dev
+    - python-pip
+    - python3-dev
+
 - name: ensure the devstack source is present
   git: repo={{ devstack_source_repo }} dest={{ devstack_source_dir }} version={{ devstack_release }}
 
