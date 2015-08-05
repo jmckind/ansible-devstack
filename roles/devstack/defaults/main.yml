@@ -6,7 +6,7 @@ devstack_release: master
 
 devstack_run_offline: False
 devstack_git_base: https://git.openstack.org
-devstack_reclone: yes
+devstack_reclone: False
 devstack_install_dir: /opt/stack
 devstack_state_dir: "{{ ansible_env.HOME }}/stack"
 devstack_data_dir: "{{ devstack_state_dir }}/data"
