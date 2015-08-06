@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provider "virtualbox" do |vbx|
         vbx.name = "devstack"
-        vbx.memory = 8192
+        vbx.memory = 4096
         vbx.cpus = 4
     end
 
