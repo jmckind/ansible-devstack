@@ -14,6 +14,7 @@ devstack_logs_dir: "{{ devstack_state_dir }}/logs"
 devstack_service_dir: "{{ devstack_state_dir }}/status"
 devstack_wheelhouse_dir: "{{ devstack_state_dir }}/.wheelhouse"
 devstack_log_file: "{{ devstack_install_dir }}/logs/stack.sh.log"
+devstack_run_stack_sh: no
 
 devstack_admin_password: password
 devstack_database_password: "{{ devstack_admin_password }}"
