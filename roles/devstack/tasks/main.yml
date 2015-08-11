@@ -6,9 +6,22 @@
   with_items:
     - build-essential
     - git
+    - git-review
+    - gettext
+    - gnome-doc-utils
+    - lib32z1-dev
+    - libxml2-dev
+    - libxslt-dev
+    - maven
     - python-dev
     - python-pip
     - python3-dev
+
+- name: ensure required python modules are present
+  pip: name={{ item }} state=present
+  sudo_user: root
+  with_items:
+    - tox
 
 - name: ensure the devstack source is present
   git: repo={{ devstack_source_repo }} dest={{ devstack_source_dir }} version={{ devstack_release }}
@@ -21,3 +34,4 @@
 
 - name: ensure devstack is installed
   shell: ./stack.sh chdir={{ devstack_source_dir }}
+  when: devstack_run_stack_sh
