@@ -1,0 +1,12 @@
+---
+
+documentation_install_dir: /opt/stack
+documentation_milestone: master
+
+documentation_manuals_source_repo: https://github.com/openstack/openstack-manuals.git
+documentation_manuals_source_dir: "{{ documentation_install_dir }}/openstack-manuals"
+documentation_manuals_release: "{{ documentation_milestone }}"
+
+documentation_ops_guide_source_repo: https://github.com/openstack/operations-guide.git
+documentation_ops_guide_source_dir: "{{ documentation_install_dir }}/operations-guide"
+documentation_ops_guide_release: "{{ documentation_milestone }}"
