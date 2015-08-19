@@ -5,33 +5,35 @@
   gather_facts: no
 
   vars_prompt:
-
-    - name: "rax_region_name"
+    - name: "region_name"
       prompt: "Rackspace Cloud Region"
-      default: "DFW"
+      default: "IAD"
       private: no
 
-    - name: "rax_instance_count"
-      prompt: "Number of Instances"
+    - name: "group_name"
+      prompt: "Name for the group of instances (Ex. testing)"
+      private: no
+
+    - name: "instance_count"
+      prompt: "Number of instances"
       default: 1
       private: no
 
   tasks:
-
     - name: ensure the instance is created
       local_action:
         module: rax
         api_key: "{{ rax_password }}"
         auto_increment: yes
-        count: "{{ rax_instance_count }}"
+        count: "{{ instance_count }}"
         #flavor: "performance1-4" # 4 GB Performance
         flavor: "6" # 8GB Standard Instance
         image: "Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)"
         files:
           /root/.ssh/authorized_keys: ~/.ssh/id_rsa.pub
-        group: osdev
-        name: "osdev"
-        region: "{{ rax_region_name }}"
+        group: "{{ group_name|lower }}"
+        name: "osic-{{ group_name|lower }}-osdev%02d"
+        region: "{{ region_name }}"
         state: present
         tenant_id: "{{ rax_tenant_id }}"
         username: "{{ rax_username }}"
@@ -41,11 +43,11 @@
       register: raxcloud
 
     - name: ensure the instance is added to a host group
-      local_action: add_host name={{ item.accessIPv4 }} hostname={{ item.name }} ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa groupname=raxhosts
+      local_action: add_host name={{ item.accessIPv4 }} hostname={{ item.name }} ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa groupname=rax
       with_items: raxcloud.instances
 
     - name: ensure the inventory file is created
-      local_action: shell echo "{{ item.name }} ansible_ssh_host={{ item.accessIPv4 }} ansible_ssh_port=443 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa" >> hosts-raxcloud #"
+      local_action: shell echo "{{ item.name }} ansible_ssh_host={{ item.accessIPv4 }} ansible_ssh_port=443 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa" >> hosts-raxcloud-{{ group_name|lower }} #"
       with_items: raxcloud.instances
 
     - name: ensure instance is responding
@@ -54,4 +56,4 @@
 
     - name: ensure instance report is generated
       connection: local
-      local_action: template src=templates/raxcloud.html.j2 dest={{ inventory_dir }}/raxcloud.html
+      local_action: template src=templates/inventory-raxcloud.html.j2 dest={{ inventory_dir }}/inventory-raxcloud-{{ group_name|lower }}.html
