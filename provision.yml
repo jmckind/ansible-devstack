@@ -3,6 +3,11 @@
 - name: Provision a base OpenStack development environment
   hosts: all
   gather_facts: yes
+
+  tasks:
+    - name: Dump the ansible environment
+      connection: local
+      local_action: template src=templates/environment.log.j2 dest={{ inventory_dir }}/environment.log
+
   roles:
     - common
-    - development

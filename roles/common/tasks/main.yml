@@ -1,17 +1,48 @@
 ---
 
-- name: Dump the ansible environment
-  connection: local
-  local_action: template src=environment.j2 dest={{ inventory_dir }}/environment.log
-
-- name: ensure common packages are present
+- name: ensure required packages are present
   apt: name={{ item }} state=present update_cache=yes
-  sudo_user: root
+  sudo: yes
   with_items:
+    - build-essential
     - curl
-    - iftop
+    - git
+    - git-review
+    - gettext
+    - gnome-doc-utils
     - htop
+    - iftop
+    - lib32z1-dev
+    - libxml2-dev
+    - libxslt-dev
     - manpages
+    - maven
     - openssl
+    - python-dev
+    - python-pip
+    - python3-dev
     - vim
     - wget
+
+- name: ensure required python modules are present
+  pip: name={{ item }} state=present
+  sudo_user: root
+  with_items:
+    - tox
+
+- name: ensure the development user is present
+  user: name={{ development_user }} password="{{ development_password }}" shell=/bin/bash comment="OpenStack Developer"
+  sudo_user: root
+
+- name: ensure the bashrc file is present
+  copy: src=bashrc dest=/home/{{ development_user }}/.bashrc mode=0700
+
+- name: ensure the source directory is present
+  file: path={{ development_source_dir }} state=directory owner={{ development_user }} group={{ development_user }}
+
+- name: ensure the authorized keys are present
+  authorized_key: user={{ development_user }} key="{{ lookup('file', item) }}"
+  with_items: development_authorized_keys
+
+- name: ensure the development user has sudo priveledges
+  template: src=sudoers.j2 dest=/etc/sudoers.d/{{ development_user }} owner=root group=root mode=0440
