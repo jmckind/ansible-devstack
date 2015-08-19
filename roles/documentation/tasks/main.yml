@@ -3,5 +3,11 @@
 - name: ensure the openstack-manuals source is present
   git: repo={{ documentation_manuals_source_repo }} dest={{ documentation_manuals_source_dir }} version={{ documentation_manuals_release }}
 
+- name: ensure the ha-guide source is present
+  git: repo={{ documentation_ha_guide_source_repo }} dest={{ documentation_ha_guide_source_dir }} version={{ documentation_ha_guide_release }}
+
 - name: ensure the operations-guide source is present
   git: repo={{ documentation_ops_guide_source_repo }} dest={{ documentation_ops_guide_source_dir }} version={{ documentation_ops_guide_release }}
+
+- name: ensure the security-guide source is present
+  git: repo={{ documentation_security_guide_source_repo }} dest={{ documentation_security_guide_source_dir }} version={{ documentation_security_guide_release }}
