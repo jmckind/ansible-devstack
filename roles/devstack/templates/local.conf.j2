@@ -1,4 +1,5 @@
 [[local|localrc]]
+STACK_USER={{ devstack_user }}
 OFFLINE={{ devstack_run_offline }}
 GIT_BASE={{ devstack_git_base }}
 RECLONE={{ devstack_reclone }}
@@ -14,9 +15,9 @@ RABBIT_PASSWORD={{ devstack_rabbit_password }}
 SERVICE_TOKEN={{ devstack_service_token }}
 SERVICE_PASSWORD={{ devstack_service_password }}
 
-FIXED_RANGE={{ devstack_fixed_ip_range }}
-FLOATING_RANGE={{ devstack_floating_ip_range }}
-HOST_IP={{ devstack_host_ip }}
+#FIXED_RANGE={{ devstack_fixed_ip_range }}
+#FLOATING_RANGE={{ devstack_floating_ip_range }}
+#HOST_IP={{ devstack_host_ip }}
 
 KEYSTONE_BRANCH={{ devstack_keystone_release }}
 NOVA_BRANCH={{ devstack_nova_release }}
@@ -32,18 +33,35 @@ SWIFT_HASH={{ devstack_swift_hash }}
 SWIFT_REPLICAS={{ devstack_swift_replicas }}
 
 {% if devstack_neutron_enabled %}
-ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
 {% endif %}
 
 {% if devstack_ceilometer_enabled %}
-ENABLED_SERVICES+=,ceilometer-acompute,ceilometer-acentral,ceilometer-collector,ceilometer-api
-ENABLED_SERVICES+=,ceilometer-alarm-notifier,ceilometer-alarm-evaluator
+enable_service ceilometer-acompute
+enable_service ceilometer-acentral
+enable_service ceilometer-collector
+enable_service ceilometer-api
+enable_service ceilometer-alarm-notifier
+enable_service ceilometer-alarm-evaluator
 {% endif %}
 
 {% if devstack_heat_enabled %}
-ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
+enable_service heat
+enable_service h-api
+enable_service h-api-cfn
+enable_service h-api-cw
+enable_service h-eng
 {% endif %}
 
 {% if devstack_swift_enabled %}
-ENABLED_SERVICES+=,s-proxy,s-object,s-container,s-account
+enable_service s-proxy
+enable_service s-object
+enable_service s-container
+enable_service s-account
 {% endif %}
