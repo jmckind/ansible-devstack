@@ -1,25 +1,27 @@
 ---
 
+devstack_user: "{{ development_user | default('stack') }}"
+
+devstack_state_dir: /var/lib/stack
+devstack_data_dir: "{{ devstack_state_dir }}/data"
+devstack_logs_dir: "/var/log/stack"
+devstack_install_dir: /opt/stack
+devstack_service_dir: "{{ devstack_state_dir }}/status"
+devstack_wheelhouse_dir: "{{ devstack_state_dir }}/.wheelhouse"
+devstack_log_file: "{{ devstack_logs_dir }}/stack.sh.log"
+
 devstack_source_repo: https://github.com/openstack-dev/devstack.git
-devstack_source_dir: "{{ ansible_env.HOME }}/devstack"
+devstack_source_dir: "{{ devstack_install_dir }}/devstack"
 devstack_release: master
 
 devstack_run_offline: False
 devstack_git_base: https://git.openstack.org
 devstack_reclone: False
-devstack_install_dir: /opt/stack
-devstack_state_dir: "{{ ansible_env.HOME }}/stack"
-devstack_data_dir: "{{ devstack_state_dir }}/data"
-devstack_logs_dir: "{{ devstack_state_dir }}/logs"
-devstack_service_dir: "{{ devstack_state_dir }}/status"
-devstack_wheelhouse_dir: "{{ devstack_state_dir }}/.wheelhouse"
-devstack_log_file: "{{ devstack_install_dir }}/logs/stack.sh.log"
-devstack_run_stack_sh: no
 
 devstack_admin_password: password
 devstack_database_password: "{{ devstack_admin_password }}"
 devstack_rabbit_password: "{{ devstack_admin_password }}"
-devstack_service_token: "{{ devstack_admin_password }}"
+devstack_service_token: "{{ 1000000 | random(1) | to_uuid }}"
 devstack_service_password: "{{ devstack_admin_password }}"
 
 devstack_fixed_ip_range: 10.0.0.0/24
@@ -32,7 +34,7 @@ devstack_glance_release: "{{ devstack_release }}"
 devstack_cinder_release: "{{ devstack_release }}"
 devstack_horizon_release: "{{ devstack_release }}"
 
-devstack_neutron_enabled: no
+devstack_neutron_enabled: yes
 devstack_neutron_release: "{{ devstack_release }}"
 
 devstack_ceilometer_enabled: no
