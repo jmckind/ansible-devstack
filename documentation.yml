@@ -1,0 +1,7 @@
+---
+
+- name: Deploy OpenStack documentation projects
+  hosts: all
+  gather_facts: no
+  roles:
+    - { role: documentation, sudo_user: "{{ development_user | default('stack') }}" }
