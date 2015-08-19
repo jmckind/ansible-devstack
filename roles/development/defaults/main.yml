@@ -1,0 +1,6 @@
+---
+
+development_user: stack
+development_source_dir: "/opt/{{ development_user }}"
+development_authorized_keys:
+  - ~/.ssh/id_rsa.pub

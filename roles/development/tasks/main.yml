@@ -1,0 +1,41 @@
+---
+
+- name: ensure required packages are present
+  apt: name={{ item }} state=present
+  sudo_user: root
+  with_items:
+    - build-essential
+    - git
+    - git-review
+    - gettext
+    - gnome-doc-utils
+    - lib32z1-dev
+    - libxml2-dev
+    - libxslt-dev
+    - maven
+    - python-dev
+    - python-pip
+    - python3-dev
+
+- name: ensure required python modules are present
+  pip: name={{ item }} state=present
+  sudo_user: root
+  with_items:
+    - tox
+
+- name: ensure the development user is present
+  user: name={{ development_user }} shell=/bin/bash comment="OpenStack Developer"
+  sudo_user: root
+
+- name: ensure the bashrc file is present
+  copy: src=bashrc dest=/home/{{ development_user }}/.bashrc mode=0700
+
+- name: ensure the source directory is present
+  file: path={{ development_source_dir }} state=directory owner={{ development_user }} group={{ development_user }}
+
+- name: ensure the authorized keys are present
+  authorized_key: user={{ development_user }} key="{{ lookup('file', item) }}"
+  with_items: development_authorized_keys
+
+- name: ensure the development user has sudo priveledges
+  template: src=sudoers.j2 dest=/etc/sudoers.d/{{ development_user }} owner=root group=root mode=0440

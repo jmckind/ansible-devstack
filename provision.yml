@@ -1,8 +1,8 @@
 ---
 
-- name: Provision a DevStack environment
+- name: Provision a base OpenStack development environment
   hosts: all
   gather_facts: yes
   roles:
     - common
-    - devstack
+    - development
