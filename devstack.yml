@@ -1,0 +1,7 @@
+---
+
+- name: Deploy DevStack
+  hosts: all
+  gather_facts: no
+  roles:
+    - { role: devstack, sudo_user: "{{ development_user | default('stack') }}" }
