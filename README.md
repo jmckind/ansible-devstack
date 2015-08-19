@@ -1,4 +1,4 @@
-# ansible-devstack
+# Ansible OpenStack Development
 
 Ansible roles and playbooks to provision an OpenStack development environment.
 
@@ -30,11 +30,15 @@ The following playbooks are located in the root project directory and are provid
 
 #### provision.yml
 
-The provision playbook will setup a base environment for OpenStack development. This playbook provides all that is needed to contribute to the OpenStack documentation.
+The provision playbook will setup a base environment for OpenStack development.
 
 #### devstack.yml
 
 The devstack playbook will setup and install DevStack on the instance.
+
+#### devstack.yml
+
+The documentation playbook will setup and install the OpenStack documentation repositories.
 
 #### raxcloud.yml
 
