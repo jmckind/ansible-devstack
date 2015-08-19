@@ -1,6 +1,7 @@
 # ansible-devstack
 
-Ansible roles and playbooks to provision a DevStack environment.
+Ansible roles and playbooks to provision an OpenStack development environment.
+
 
 ## Installation
 
@@ -21,3 +22,20 @@ Once an instance is up, run the provisioning playbook. This will install the bas
     $ ansible-playbook provision.yml
 
 The ```stack.sh``` script will not be run by default, as the process can take a long time to complete. If you would like to have the playbook run it for you, change the ```devstack_run_stack_sh``` variable to "yes" in the devstack role defaults.
+
+
+## Playbooks
+
+The following playbooks are located in the root project directory and are provided to provision and deploy various aspects of an OpenStack development environment.
+
+#### provision.yml
+
+The provision playbook will setup a base environment for OpenStack development. This playbook provides all that is needed to contribute to the OpenStack documentation.
+
+#### devstack.yml
+
+The devstack playbook will setup and install DevStack on the instance.
+
+#### raxcloud.yml
+
+The raxcloud playbook will provision one or more instances on the Rackspace Public Cloud.
