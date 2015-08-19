@@ -3,22 +3,39 @@
 - name: Provision a Rackspace Cloud Server instance
   hosts: localhost
   gather_facts: no
+
+  vars_prompt:
+
+    - name: "rax_region_name"
+      prompt: "Rackspace Cloud Region"
+      default: "DFW"
+      private: no
+
+    - name: "rax_instance_count"
+      prompt: "Number of Instances"
+      default: 1
+      private: no
+
   tasks:
-    - name: ensure the devstack instance is created
+
+    - name: ensure the instance is created
       local_action:
         module: rax
-        api_key: "{{ openstack_env_password }}"
+        api_key: "{{ rax_password }}"
         auto_increment: yes
-        flavor: "performance1-4" # 4 GB Performance
+        count: "{{ rax_instance_count }}"
+        #flavor: "performance1-4" # 4 GB Performance
+        flavor: "6" # 8GB Standard Instance
         image: "Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)"
         files:
           /root/.ssh/authorized_keys: ~/.ssh/id_rsa.pub
-        group: devstack
-        name: "devstack"
-        region: "{{ openstack_env_region_name }}"
+        group: osdev
+        name: "osdev"
+        region: "{{ rax_region_name }}"
         state: present
-        tenant_id: "{{ openstack_env_tenant_id }}"
-        username: "{{ openstack_env_username }}"
+        tenant_id: "{{ rax_tenant_id }}"
+        username: "{{ rax_username }}"
+        user_data: files/rax_user_data.txt
         wait: yes
         wait_timeout: 300 # 5 minutes
       register: raxcloud
@@ -28,16 +45,13 @@
       with_items: raxcloud.instances
 
     - name: ensure the inventory file is created
-      local_action: shell echo "devstack ansible_ssh_host={{ item.accessIPv4 }} ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa" >> hosts-raxcloud #"
+      local_action: shell echo "{{ item.name }} ansible_ssh_host={{ item.accessIPv4 }} ansible_ssh_port=443 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa" >> hosts-raxcloud #"
       with_items: raxcloud.instances
 
     - name: ensure instance is responding
-      local_action: wait_for host={{ item.accessIPv4 }} port=22 delay=10 timeout=60
+      local_action: wait_for host={{ item.accessIPv4 }} port=443 delay=10 timeout=60
       with_items: raxcloud.instances
 
-- name: Configure the Rackspace Cloud Server instance
-  hosts: raxhosts
-  gather_facts: yes
-  roles:
-    - common
-    - devstack
+    - name: ensure instance report is generated
+      connection: local
+      local_action: template src=templates/raxcloud.html.j2 dest={{ inventory_dir }}/raxcloud.html

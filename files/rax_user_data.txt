@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sed -i "s|Port 22|Port 22\nPort 443|g" /etc/ssh/sshd_config
+service ssh restart
