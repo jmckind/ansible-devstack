@@ -1,7 +1,7 @@
 ---
 
 development_user: stack
-development_password: '$1$openstac$bzOfcv.Sx5yvUkO3eepvm.' # openssl passwd -salt openstack -1 openstack
+development_password: '$1$stack$fuP71eA95SCnZOUZd2mwi1' # openssl passwd -salt stack -1 stack
 development_source_dir: "/opt/{{ development_user }}"
 development_authorized_keys:
   - ~/.ssh/id_rsa.pub
