@@ -32,7 +32,7 @@
         files:
           /root/.ssh/authorized_keys: ~/.ssh/id_rsa.pub
         group: "{{ group_name|lower }}"
-        name: "osic-{{ group_name|lower }}-osdev%02d"
+        name: "{{ group_name|lower }}-osdev%02d"
         region: "{{ region_name }}"
         state: present
         tenant_id: "{{ rax_tenant_id }}"
