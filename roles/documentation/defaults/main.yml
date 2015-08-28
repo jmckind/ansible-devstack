@@ -2,20 +2,11 @@
 
 documentation_install_dir: /opt/stack
 documentation_milestone: master
+documentation_git_depth: 1
 
-documentation_manuals_source_repo: https://github.com/openstack/openstack-manuals.git
-documentation_manuals_source_dir: "{{ documentation_install_dir }}/openstack-manuals"
-documentation_manuals_release: "{{ documentation_milestone }}"
-
-documentation_ha_guide_source_repo: https://github.com/openstack/ha-guide.git
-documentation_ha_guide_source_dir: "{{ documentation_install_dir }}/ha-guide"
-documentation_ha_guide_release: "{{ documentation_milestone }}"
-
-documentation_ops_guide_source_repo: https://github.com/openstack/operations-guide.git
-documentation_ops_guide_source_dir: "{{ documentation_install_dir }}/operations-guide"
-documentation_ops_guide_release: "{{ documentation_milestone }}"
-
-documentation_security_guide_source_repo: https://github.com/openstack/security-doc.git
-documentation_security_guide_source_dir: "{{ documentation_install_dir }}/security-doc"
-documentation_security_guide_release: "{{ documentation_milestone }}"
-
+documentation_repos:
+  - { name: "api-site", url: "https://github.com/openstack/api-site.git", version: "{{ documentation_milestone }}" }
+  - { name: "ha-guide", url: "https://github.com/openstack/ha-guide.git", version: "{{ documentation_milestone }}" }
+  - { name: "openstack-manuals", url: "https://github.com/openstack/openstack-manuals.git", version: "{{ documentation_milestone }}" }
+  - { name: "operations-guide", url: "https://github.com/openstack/operations-guide.git", version: "{{ documentation_milestone }}" }
+  - { name: "security-doc", url: "https://github.com/openstack/security-doc.git", version: "{{ documentation_milestone }}" }
