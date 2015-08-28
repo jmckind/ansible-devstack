@@ -1,8 +1,13 @@
+#
+# {{ ansible_managed }}
+#
+
 [[local|localrc]]
 STACK_USER={{ devstack_user }}
 OFFLINE={{ devstack_run_offline }}
 GIT_BASE={{ devstack_git_base }}
 RECLONE={{ devstack_reclone }}
+GIT_DEPTH={{ devstack_git_depth }}
 DEST={{ devstack_install_dir }}
 DATA_DIR={{ devstack_data_dir }}
 LOGDIR={{ devstack_logs_dir }}

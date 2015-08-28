@@ -16,6 +16,7 @@ devstack_release: master
 
 devstack_run_offline: False
 devstack_git_base: https://git.openstack.org
+devstack_git_depth: 1
 devstack_reclone: False
 
 devstack_admin_password: password
